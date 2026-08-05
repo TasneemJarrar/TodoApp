@@ -2,65 +2,72 @@ const todoInput = document.querySelector(".todo-input");
 const todoBtn = document.querySelector(".todo-button");
 const todoList = document.querySelector(".todo-list");
 const todoFilter = document.querySelector(".todo-filter");
+const emptyTask = document.querySelector(".emptyTask");
 
-const todoItemBtnStyles = "text-white border-0 m-0 p-4 cursor-pointer";
+const todoItemBtnStyles = "text-white border-0 m-0 py-4 px-2 cursor-pointer";
 const fall = "scale-0 opacity-0";
 
 // Event Listeners
 todoBtn.addEventListener("click", addTodo);
 todoList.addEventListener("click", deleteOrCheck);
 todoFilter.addEventListener("click", (e) => {
-  const btn = e.target.closest(".filter");
-  const filter = btn.dataset.filter;
-  filterTasks(filter);
+  const option = e.target.closest(".filter");
+  const filter = option.value;
+  console.log(filter);
 });
 document.addEventListener("DOMContentLoaded", getsTodos);
 
 // Functions
 function addTodo(e) {
   e.preventDefault();
+  const task = todoInput.value.trim();
+
+  if (!task) {
+    emptyTask.classList.remove("hidden");
+    return;
+  }
+
+  emptyTask.classList.add("hidden");
 
   const todoDiv = document.createElement("div");
   todoDiv.classList.add(
     "flex",
     "justify-between",
-    "bg-white",
+    "bg-slate-100/30",
     "text-black",
     "items-center",
     "transition-all",
     "duration-300",
     "ease-in-out",
+    "rounded-sm",
   );
 
   const newTodo = document.createElement("li");
-  newTodo.innerText = todoInput.value;
-  newTodo.classList.add("todo-item", "flex-1", "p-4");
+  newTodo.innerText = task;
+  newTodo.classList.add("todo-item", "flex-1", "p-4", "text-white");
   todoDiv.appendChild(newTodo);
 
-  saveLocalTodo(todoInput.value);
+  saveLocalTodo(task);
 
   const trashBtn = document.createElement("button");
-  trashBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="pointer-events-none" width="24" height="24" viewBox="0 0 1024 1024">
-	<path fill="currentColor" fill-opacity=".15" d="M292.7 840h438.6l24.2-512h-487z" />
-	<path fill="currentColor" d="M864 256H736v-80c0-35.3-28.7-64-64-64H352c-35.3 0-64 28.7-64 64v80H160c-17.7 0-32 14.3-32 32v32c0 4.4 3.6 8 8 8h60.4l24.7 523c1.6 34.1 29.8 61 63.9 61h454c34.2 0 62.3-26.8 63.9-61l24.7-523H888c4.4 0 8-3.6 8-8v-32c0-17.7-14.3-32-32-32m-504-72h304v72H360zm371.3 656H292.7l-24.2-512h487z" />
+  trashBtn.innerHTML = `
+    <svg xmlns="http://www.w3.org/2000/svg" class="pointer-events-none group-hover:text-rose-400" width="24" height="24" viewBox="0 0 24 24">
+	<path fill="currentColor" d="M7 21q-.825 0-1.412-.587T5 19V6q-.425 0-.712-.288T4 5t.288-.712T5 4h4q0-.425.288-.712T10 3h4q.425 0 .713.288T15 4h4q.425 0 .713.288T20 5t-.288.713T19 6v13q0 .825-.587 1.413T17 21zM17 6H7v13h10zm-6.287 10.713Q11 16.425 11 16V9q0-.425-.288-.712T10 8t-.712.288T9 9v7q0 .425.288.713T10 17t.713-.288m4 0Q15 16.426 15 16V9q0-.425-.288-.712T14 8t-.712.288T13 9v7q0 .425.288.713T14 17t.713-.288M7 6v13z" />
 </svg>
-`;
-  trashBtn.classList.add(
-    "trash-btn",
-    "bg-orange-500",
-    ...todoItemBtnStyles.split(" "),
-  );
+
+    `;
+  trashBtn.classList.add("trash-btn", "group", ...todoItemBtnStyles.split(" "));
   todoDiv.appendChild(trashBtn);
 
   const completedBtn = document.createElement("button");
-  completedBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="pointer-events-none" width="24" height="24" viewBox="0 0 24 24">
-	<path fill="currentColor" d="M5 19h14V5H5zm2.41-7.4l2.58 2.58l6.59-6.59L17.99 9l-8 8L6 13.01z" opacity=".3" />
-	<path fill="currentColor" d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2m0 16H5V5h14zM17.99 9l-1.41-1.42l-6.59 6.59l-2.58-2.57l-1.42 1.41l4 3.99z" />
+  completedBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="pointer-events-none fill-none group-hover:text-emerald-400" width="24" height="24" viewBox="0 0 24 24">
+	<path fill="currentColor" d="M16.972 6.251a2 2 0 0 0-2.72.777l-3.713 6.682l-2.125-2.125a2 2 0 1 0-2.828 2.828l4 4c.378.379.888.587 1.414.587l.277-.02a2 2 0 0 0 1.471-1.009l5-9a2 2 0 0 0-.776-2.72" />
 </svg>
-`;
+
+      `;
   completedBtn.classList.add(
     "complete-btn",
-    "bg-green-500",
+    "group",
     ...todoItemBtnStyles.split(" "),
   );
   todoDiv.appendChild(completedBtn);
@@ -78,6 +85,9 @@ function deleteOrCheck(e) {
     todo.addEventListener("transitionend", () => {
       todo.remove();
       removeLocalTodo(todo);
+      if (todoList.children.length === 0) {
+        emptyTask.classList.remove("hidden");
+      }
     });
   }
 
@@ -135,46 +145,55 @@ function checkStorage() {
 
 function getsTodos() {
   checkStorage();
+  
+  if (todos.length === 0) {
+    emptyTask.classList.remove("hidden");
+  } else {
+    emptyTask.classList.add("hidden");
+  }
+
   todos.forEach((todo) => {
     const todoDiv = document.createElement("div");
     todoDiv.classList.add(
       "flex",
       "justify-between",
-      "bg-white",
+      "bg-slate-100/30",
       "text-black",
       "items-center",
       "transition-all",
       "duration-300",
       "ease-in-out",
+      "rounded-sm",
     );
 
     const newTodo = document.createElement("li");
     newTodo.innerText = todo;
-    newTodo.classList.add("todo-item", "flex-1", "p-4");
+    newTodo.classList.add("todo-item", "flex-1", "p-4", "text-white");
     todoDiv.appendChild(newTodo);
 
     const trashBtn = document.createElement("button");
-    trashBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="pointer-events-none" width="24" height="24" viewBox="0 0 1024 1024">
-	<path fill="currentColor" fill-opacity=".15" d="M292.7 840h438.6l24.2-512h-487z" />
-	<path fill="currentColor" d="M864 256H736v-80c0-35.3-28.7-64-64-64H352c-35.3 0-64 28.7-64 64v80H160c-17.7 0-32 14.3-32 32v32c0 4.4 3.6 8 8 8h60.4l24.7 523c1.6 34.1 29.8 61 63.9 61h454c34.2 0 62.3-26.8 63.9-61l24.7-523H888c4.4 0 8-3.6 8-8v-32c0-17.7-14.3-32-32-32m-504-72h304v72H360zm371.3 656H292.7l-24.2-512h487z" />
+    trashBtn.innerHTML = `
+    <svg xmlns="http://www.w3.org/2000/svg" class="pointer-events-none group-hover:text-rose-400" width="24" height="24" viewBox="0 0 24 24">
+	<path fill="currentColor" d="M7 21q-.825 0-1.412-.587T5 19V6q-.425 0-.712-.288T4 5t.288-.712T5 4h4q0-.425.288-.712T10 3h4q.425 0 .713.288T15 4h4q.425 0 .713.288T20 5t-.288.713T19 6v13q0 .825-.587 1.413T17 21zM17 6H7v13h10zm-6.287 10.713Q11 16.425 11 16V9q0-.425-.288-.712T10 8t-.712.288T9 9v7q0 .425.288.713T10 17t.713-.288m4 0Q15 16.426 15 16V9q0-.425-.288-.712T14 8t-.712.288T13 9v7q0 .425.288.713T14 17t.713-.288M7 6v13z" />
 </svg>
-`;
+
+    `;
     trashBtn.classList.add(
       "trash-btn",
-      "bg-orange-500",
+      "group",
       ...todoItemBtnStyles.split(" "),
     );
     todoDiv.appendChild(trashBtn);
 
     const completedBtn = document.createElement("button");
-    completedBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="pointer-events-none" width="24" height="24" viewBox="0 0 24 24">
-	<path fill="currentColor" d="M5 19h14V5H5zm2.41-7.4l2.58 2.58l6.59-6.59L17.99 9l-8 8L6 13.01z" opacity=".3" />
-	<path fill="currentColor" d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2m0 16H5V5h14zM17.99 9l-1.41-1.42l-6.59 6.59l-2.58-2.57l-1.42 1.41l4 3.99z" />
+    completedBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="pointer-events-none fill-none group-hover:text-emerald-400" width="24" height="24" viewBox="0 0 24 24">
+	<path fill="currentColor" d="M16.972 6.251a2 2 0 0 0-2.72.777l-3.713 6.682l-2.125-2.125a2 2 0 1 0-2.828 2.828l4 4c.378.379.888.587 1.414.587l.277-.02a2 2 0 0 0 1.471-1.009l5-9a2 2 0 0 0-.776-2.72" />
 </svg>
-`;
+
+      `;
     completedBtn.classList.add(
       "complete-btn",
-      "bg-green-500",
+      "group",
       ...todoItemBtnStyles.split(" "),
     );
     todoDiv.appendChild(completedBtn);
@@ -189,3 +208,4 @@ function removeLocalTodo(todo) {
   todos.splice(todos.indexOf(todo.children[0].innerText), 1);
   localStorage.setItem("todos", JSON.stringify(todos));
 }
+

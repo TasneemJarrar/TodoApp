@@ -17,47 +17,25 @@
   <link rel="stylesheet" href="./assets/css/output.css">
 </head>
 
-<body class="min-h-screen font-main bg-linear-to-r from-yellow-200 to-orange-300 color-white font-display">
-
+<body class="min-h-screen font-main bg-linear-to-r from-teal-950 via-slate-950 to-cyan-950 text-white font-display">
 
   <header class="">
     <div class="container mx-auto py-4 px-4 md:px-5">
-      <div class="flex justify-center items-center">
-        <p class="text-4xl font-bold">Tasneems's To Do List</p>
+      <div class="flex justify-center align items-center">
+
+        <p class="text-xl font-bold">Tasneems's To Do List</p>
       </div>
     </div>
   </header>
 
+  <div class="emptyTask container mx-auto px-4 md:px-5 min-h-screen text-white flex justify-center items-center flex-col gap-4 hidden">
+    <p class="font-display text-2xl ">nothing here yet</p>
+    <p class="text-sm ">type below and click add to add your first task</p>
+  </div>
 
   <main>
     <div class="container mx-auto py-4 px-4 md:px-5">
       <div class="flex flex-col gap-3 justify-center items-center">
-
-        <div class="todo-filter p-1 relative overflow-hidden font-mono flex gap-3 text-sm font-semibold cursor-pointer">
-          <button class="filter bg-purple-400" data-filter="all">All</button>
-          <butto class="filter bg-purple-400" data-filter="completed">Completed</butto>
-          <button class="filter bg-purple-400" data-filter="uncompleted">Uncompleted</button>
-        </div>
-
-        <form class="flex w-fit justify-center items-center bg-white">
-          <input type="text" class="todo-input p-2  focus:outline-0" />
-          <button
-            class="todo-button p-2 text-orange-300 hover:bg-orange-300 hover:text-white transition-all duration-300 ease-in-out">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" viewBox="0 0 48 48">
-              <defs>
-                <mask id="SVGtHa8QpSd">
-                  <g fill="none" stroke="#fff" stroke-linejoin="round" stroke-width="4">
-                    <rect width="36" height="36" x="6" y="6" fill="#555" rx="3" />
-                    <path stroke-linecap="round" d="M24 16v16m-8-8h16" />
-                  </g>
-                </mask>
-              </defs>
-              <path fill="currentColor" d="M0 0h48v48H0z" mask="url(#SVGtHa8QpSd)" />
-            </svg>
-          </button>
-        </form>
-
-
         <div class="flex justify-center items-center">
           <ul class="todo-list list-none min-w-lg flex flex-col gap-3">
           </ul>
@@ -67,6 +45,31 @@
     </div>
 
   </main>
+
+  <footer class="fixed bottom-0 right-0 left-0 bg-linear-to-r from-teal-950 via-slate-950 to-cyan-950 text-white">
+    <div class="container mx-auto py-4 px-4 md:px-5">
+      <div class="flex w-full justify-center items-center gap-3">
+        <form class="flex rounded-sm items-center px-4 py-1 bg-slate-100/30">
+          <input type="text" class="todo-input w-125 p-1 focus:outline-0" />
+          <button class="todo-button p-2 text-white hover:text-emerald-500 transition-all duration-300 ease-in-out">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+              <path fill="currentColor" fill-rule="evenodd"
+                d="M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v4h4a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2h-4v4a2 2 0 0 1-2 2h-2a2 2 0 0 1-2-2v-4H5a2 2 0 0 1-2-2v-2a2 2 0 0 1 2-2h4z"
+                clip-rule="evenodd" />
+            </svg>
+          </button>
+        </form>
+        <div class="todo-filter p-1 relative overflow-hidden text-sm font-semibold">
+          <select class="filter bg-emerald-400 text-white px-3 py-2 rounded-sm cursor-pointer outline-none">
+            <option value="all">All</option>
+            <option value="completed">Completed</option>
+            <option value="uncompleted">Uncompleted</option>
+          </select>
+
+        </div>
+      </div>
+    </div>
+  </footer>
 
 
   <script src="./assets/js/main.js"></script>
