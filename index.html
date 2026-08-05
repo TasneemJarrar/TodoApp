@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To Do List</title>
+
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet">
+
+
+  <link rel="stylesheet" href="./assets/css/output.css">
+</head>
+
+<body class="min-h-screen font-display bg-linear-to-r from-yellow-200 to-orange-300 color-white font-display">
+
+
+  <header class="">
+    <div class="container mx-auto py-4 px-4 md:px-5">
+      <div class="flex justify-center items-center">
+        <p class="text-4xl font-bold">Tasneems's To Do List</p>
+      </div>
+    </div>
+  </header>
+
+
+  <main>
+    <div class="container mx-auto py-4 px-4 md:px-5">
+      <div class="flex flex-col gap-3 justify-center items-center">
+        
+        <form class="flex w-fit justify-center items-center bg-white">
+          <input type="text" class="todo-input p-2  focus:outline-0" />
+          <button class="todo-button p-2 text-orange-300 hover:bg-orange-300 hover:text-white transition-all duration-300 ease-in-out">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8"
+            viewBox="0 0 48 48">
+            <defs>
+              <mask id="SVGtHa8QpSd">
+                <g fill="none" stroke="#fff" stroke-linejoin="round" stroke-width="4">
+                  <rect width="36" height="36" x="6" y="6" fill="#555" rx="3" />
+                  <path stroke-linecap="round" d="M24 16v16m-8-8h16" />
+                </g>
+              </mask>
+            </defs>
+            <path fill="currentColor" d="M0 0h48v48H0z" mask="url(#SVGtHa8QpSd)" />
+          </svg>
+        </button>
+      </form>
+      
+
+        <div class="flex justify-center items-center">
+          <ul class="todo-list list-none min-w-lg flex flex-col gap-3">
+          </ul>
+        </div>
+      
+    </div>
+    </div>
+
+  </main>
+
+
+  <script src="./assets/js/main.js"></script>
+</body>
+
+</html>
