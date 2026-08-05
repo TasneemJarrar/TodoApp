@@ -4,7 +4,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        display: ["Poppins", "sans-serif"],
+        main: ["Poppins", "sans-serif"],
       },
       screens: {
         xs: "480px",

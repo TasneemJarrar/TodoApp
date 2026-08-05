@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="./assets/css/output.css">
 </head>
 
-<body class="min-h-screen font-display bg-linear-to-r from-yellow-200 to-orange-300 color-white font-display">
+<body class="min-h-screen font-main bg-linear-to-r from-yellow-200 to-orange-300 color-white font-display">
 
 
   <header class="">
@@ -32,32 +32,38 @@
   <main>
     <div class="container mx-auto py-4 px-4 md:px-5">
       <div class="flex flex-col gap-3 justify-center items-center">
-        
+
+        <div class="todo-filter p-1 relative overflow-hidden font-mono flex gap-3 text-sm font-semibold cursor-pointer">
+          <button class="filter bg-purple-400" data-filter="all">All</button>
+          <butto class="filter bg-purple-400" data-filter="completed">Completed</butto>
+          <button class="filter bg-purple-400" data-filter="uncompleted">Uncompleted</button>
+        </div>
+
         <form class="flex w-fit justify-center items-center bg-white">
           <input type="text" class="todo-input p-2  focus:outline-0" />
-          <button class="todo-button p-2 text-orange-300 hover:bg-orange-300 hover:text-white transition-all duration-300 ease-in-out">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8"
-            viewBox="0 0 48 48">
-            <defs>
-              <mask id="SVGtHa8QpSd">
-                <g fill="none" stroke="#fff" stroke-linejoin="round" stroke-width="4">
-                  <rect width="36" height="36" x="6" y="6" fill="#555" rx="3" />
-                  <path stroke-linecap="round" d="M24 16v16m-8-8h16" />
-                </g>
-              </mask>
-            </defs>
-            <path fill="currentColor" d="M0 0h48v48H0z" mask="url(#SVGtHa8QpSd)" />
-          </svg>
-        </button>
-      </form>
-      
+          <button
+            class="todo-button p-2 text-orange-300 hover:bg-orange-300 hover:text-white transition-all duration-300 ease-in-out">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" viewBox="0 0 48 48">
+              <defs>
+                <mask id="SVGtHa8QpSd">
+                  <g fill="none" stroke="#fff" stroke-linejoin="round" stroke-width="4">
+                    <rect width="36" height="36" x="6" y="6" fill="#555" rx="3" />
+                    <path stroke-linecap="round" d="M24 16v16m-8-8h16" />
+                  </g>
+                </mask>
+              </defs>
+              <path fill="currentColor" d="M0 0h48v48H0z" mask="url(#SVGtHa8QpSd)" />
+            </svg>
+          </button>
+        </form>
+
 
         <div class="flex justify-center items-center">
           <ul class="todo-list list-none min-w-lg flex flex-col gap-3">
           </ul>
         </div>
-      
-    </div>
+
+      </div>
     </div>
 
   </main>
