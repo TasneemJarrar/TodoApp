@@ -13,7 +13,7 @@ todoList.addEventListener("click", deleteOrCheck);
 todoFilter.addEventListener("click", (e) => {
   const option = e.target.closest(".filter");
   const filter = option.value;
-  console.log(filter);
+  filterTasks(filter);
 });
 document.addEventListener("DOMContentLoaded", getsTodos);
 
